@@ -18,9 +18,8 @@ int main(void)
 	{
 		printf("Failed to OPEN FILE");
 	}
-
-	n1 = read(fd, buf1, BUFFER_SIZE );
-	n2 = read(fd, buf2, BUFFER_SIZE );
+	n1 = read(fd, buf1, BUFFER_SIZE - 1 );
+	n2 = read(fd, buf2, BUFFER_SIZE - 1 );
 	if ( n1 < 0 || n2 < 0 )
 	{
 		close(fd);
