@@ -6,7 +6,7 @@
 /*   By: kjungoo <kjungoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 12:38:28 by kjungoo           #+#    #+#             */
-/*   Updated: 2022/09/22 17:55:55 by kjungoo          ###   ########.fr       */
+/*   Updated: 2022/09/22 19:42:34 by kjungoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ size_t	ft_strlen(char const *s)
 
 int	is_with_nl(const char *s, char c)
 {
-	unsigned long	i;
+	size_t	i;
 
 	i = 0;
 	while (s[i])
