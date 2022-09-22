@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjungoo <kjungoo@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:25:00 by kjungoo           #+#    #+#             */
-/*   Updated: 2022/09/22 19:00:23 by kjungoo          ###   ########.fr       */
+/*   Updated: 2022/09/22 18:59:39 by kjungoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	*ft_free_and_null(void *ptr)
 {
 	if (ptr)
-	{
+	{	
 		free(ptr);
 		ptr = NULL;
 	}
@@ -58,7 +58,7 @@ char	*read_and_join(int fd, char *buf, char *backup)
 		if (backup == NULL)
 			backup = ft_strdup("");
 		tmp_p = backup;
-		backup = ft_strjoin(tmp_p, buf);
+		backup = ft_strjoin(backup, buf);
 		if (backup == 0)
 			return (NULL);
 		ft_free_and_null(tmp_p);
@@ -72,17 +72,18 @@ char	*get_next_line(int fd)
 {
 	char		*line;
 	char		*buf;
-	static char	*backup;
+	static char	*backup[OPEN_MAX];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (buf == NULL)
 		return (NULL);
-	line = read_and_join(fd, buf, backup);
+	line = read_and_join(fd, buf, backup[fd]);
 	ft_free_and_null(buf);
+	backup[fd] = NULL;
 	if (line == NULL)
 		return (NULL);
-	backup = get_line_until_nl(line);
+	backup[fd] = get_line_until_nl(line);
 	return (line);
 }
